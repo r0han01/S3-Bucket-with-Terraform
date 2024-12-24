@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "~> 4.0"
     }
   }
@@ -34,8 +34,17 @@ variable "tag_value" {
 
 # S3 bucket resource
 resource "aws_s3_bucket" "r0han" {
-  bucket = "my-unique-r0han"  # Use a unique name
+  bucket = "my-unique-r0han" # Use a unique name
   tags = {
-    "num" = var.tag_value  # Use the variable in the tag
+    "num" = var.tag_value # Use the variable in the tag
+  }
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-053b12d3152c0cc71" # AMI ID
+  instance_type = "t2.micro"              # Instance type
+
+  tags = {
+    "num" = var.tag_value
   }
 }
